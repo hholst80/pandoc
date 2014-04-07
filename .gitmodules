@@ -1,0 +1,3 @@
+[submodule "pandocfilters.git"]
+	path = pandocfilters.git
+	url = https://github.com/jgm/pandocfilters.git
