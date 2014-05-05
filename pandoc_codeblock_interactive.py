@@ -6,10 +6,8 @@ Pandc filter to convert all octave and python code blocks to interactive session
 
 import subprocess, sys, os
 from pandocfilters import toJSONFilter, CodeBlock
-import threading
-import time
 
-def octave(key, value, format, meta):
+def codeblock_interactive(key, value, format, meta):
     if key != 'CodeBlock':
       return
     options = value[0][1]
@@ -33,4 +31,4 @@ def octave(key, value, format, meta):
         return CodeBlock(("",[prg, "interactive"],[]),text)
 
 if __name__ == "__main__":
-        toJSONFilter(octave)
+        toJSONFilter(codeblock_interactive)
