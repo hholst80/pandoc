@@ -20,13 +20,20 @@ def codeblock_interactive(key, value, format, meta):
     elif 'python' in options and 'interactive' in options:
         prg = 'python'
         cmd = 'env LD_PRELOAD=./loginteractive.so STDIN=stdin.txt STDOUT=stdout.txt python -i > /dev/null'
+    elif 'ruby' in options and 'interactive' in options:
+        prg = 'ruby'
+        cmd = 'env LD_PRELOAD=./loginteractive.so STDIN=stdin.txt STDOUT=stdout.txt irb --simple-prompt > /dev/null'
     if prg and cmd:
         f = file('stdin.txt','w')
         f.write(text)
         f.close()
         subprocess.call(cmd, shell=True, bufsize=1)
         f = open('stdout.txt','r')
-        text = "\n".join(f.read().split("\n")[0:-1])
+        text = f.read().split("\n")
+        if len(text[-1]) == 0:
+            text = "\n".join(text[0:-2])
+        else: # no ending line feed.
+            text = "\n".join(text[0:-1])
         f.close()
         return CodeBlock(("",[prg, "interactive"],[]),text)
 

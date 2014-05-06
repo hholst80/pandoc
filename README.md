@@ -1,16 +1,17 @@
-pandoc octave filter
-====================
+pandoc codeblock filters
+========================
 
-This is an example of [Pandoc] filters and [loginteractive].
+This is an example of [Pandoc] filters and [loginteractive] for logging
+interactive programs as if they where executed from a terminal.
 
-Octave
+## Octave
 
 ~~~ { .octave .interactive }
-A = rand(4,4)
+A = reshape(1:4,[2 2])
 v = eig(A)
 ~~~
 
-Python
+## Python
 
 ~~~ { .python .interactive }
 def isPrime(n):
@@ -24,6 +25,15 @@ isPrime(4)
 for n in range(2,100):
     if isPrime(n):
         print n,
+~~~
+## Ruby
+
+~~~ { .ruby .interactive }
+def factorial(n)
+return 1 if n <= 1
+return n * factorial(n - 1)
+end
+factorial(20)
 ~~~
 
 [Pandoc]: http://johnmacfarlane.net/pandoc/
